@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday Basma 🎉</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
+      font-family: 'Quicksand', sans-serif;
       margin: 0;
       padding: 0;
+      background: linear-gradient(to right, #fff0f5, #ffe4e1);
       height: 100vh;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
     .container {
@@ -22,31 +24,34 @@
     }
 
     .open-button {
-      font-size: 1.5rem;
-      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      padding: 1rem 2.5rem;
       background-color: #e91e63;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
     .open-button:hover {
       transform: scale(1.05);
+      background-color: #d81b60;
     }
 
     .card {
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(40px);
       pointer-events: none;
       transition: opacity 1s ease, transform 1s ease;
       background: #ffffff;
-      padding: 2rem 3rem;
-      border-radius: 15px;
+      padding: 2.5rem 3rem;
+      border-radius: 20px;
       max-width: 700px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       display: none;
+      text-align: left;
     }
 
     .card.show {
@@ -59,22 +64,39 @@
     h1 {
       text-align: center;
       color: #e91e63;
-      font-size: 2.5rem;
+      font-size: 2.7rem;
+      margin-bottom: 1rem;
     }
 
     p {
-      font-size: 1.1rem;
-      line-height: 1.7;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #333;
     }
 
     .signature {
       text-align: right;
       margin-top: 2rem;
       font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    .flowers {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://i.imgur.com/E6VwU75.png') repeat;
+      opacity: 0.08;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
+  <div class="flowers"></div>
+
   <div class="container">
     <button class="open-button" onclick="openCard()">Open Your Birthday Card 🎁</button>
     <div class="card" id="birthdayCard">
@@ -106,3 +128,4 @@
   </script>
 </body>
 </html>
+
