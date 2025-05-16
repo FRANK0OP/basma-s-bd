@@ -1,256 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Happy Birthday Basma 🎉</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='0' y='90' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Basma 🎉</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;700&display=swap');
 
-    <style>
-        /* CSS Variables for easier theme management */
-        :root {
-            --primary-color: #e91e63;
-            --primary-dark-color: #d81b60;
-            --background-start: #fff0f5;
-            --background-end: #ffe4e1;
-            --text-color: #333;
-            --card-background: #ffffff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --button-text-color: white;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    html, body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 50%, #f0fff0 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        html, body {
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, var(--background-start), var(--background-end)); /* Slightly more dynamic gradient */
-            min-height: 100vh;
-            overflow-x: hidden;
-            color: var(--text-color);
-            display: flex; /* Use flexbox for centering content */
-            justify-content: center;
-            align-items: center;
-            line-height: 1.7; /* Improved readability */
-        }
+    .flowers {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://i.imgur.com/E6VwU75.png') repeat;
+      opacity: 0.08;
+      z-index: -1;
+    }
 
-        /* Optional: Subtle background animation */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/E6VwU75.png') repeat;
-            opacity: 0.08;
-            z-index: -1;
-            animation: backgroundPulse 15s infinite alternate ease-in-out; /* Subtle animation */
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      position: relative;
+    }
 
-        @keyframes backgroundPulse {
-            0% {
-                opacity: 0.08;
-            }
-            100% {
-                opacity: 0.12;
-            }
-        }
+    .open-button {
+      font-size: 1.4rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, #e91e63, #ff6b6b);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+      margin-top: 2rem;
+      font-weight: 700;
+      position: relative;
+      overflow: hidden;
+    }
 
+    .open-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(233, 30, 99, 0.4);
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%; /* Ensure container takes full width */
-            max-width: 900px; /* Limit container width */
-            padding: 1rem; /* Adjust padding */
-            position: relative; /* Needed for absolute positioning of confetti */
-            z-index: 1; /* Ensure content is above background effect */
-        }
+    .open-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff6b6b, #e91e63);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
 
-        .open-button {
-            font-size: 1.4rem;
-            padding: 1rem 2.5rem;
-            background-color: var(--primary-color);
-            color: var(--button-text-color);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
-            box-shadow: 0 6px 15px var(--card-shadow);
-            margin-top: 2rem;
-            position: relative;
-            z-index: 10; /* Ensure button is clickable */
-        }
+    .open-button:hover::after {
+      opacity: 1;
+    }
 
-        .open-button:hover {
-            transform: scale(1.05);
-            background-color: var(--primary-dark-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-        }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 999;
+      animation: confetti-fall 5s linear forwards;
+    }
 
-        .card {
-            opacity: 0;
-            transform: scale(0.9); /* Start slightly smaller */
-            pointer-events: none;
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Longer, smoother transition */
-            background: var(--card-background);
-            padding: 2.5rem; /* Increased padding */
-            border-radius: 20px;
-            max-width: 700px;
-            width: 100%;
-            box-shadow: 0 15px 40px var(--card-shadow); /* Enhanced shadow */
-            display: none; /* Hide initially using display */
-            text-align: left;
-            position: relative;
-            z-index: 5;
-        }
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
 
-        .card.show {
-            display: block; /* Show using display */
-            opacity: 1;
-            transform: scale(1); /* Scale to normal size */
-            pointer-events: auto;
-            margin-top: 2rem; /* Adjust margin */
-            animation: fadeInScale 1.2s ease-out forwards; /* Use an animation for better control */
-        }
+    .card {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      pointer-events: none;
+      transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2.5rem;
+      border-radius: 20px;
+      max-width: 750px;
+      width: 100%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      display: none;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-        @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #ff6b6b, #e91e63, #ff6b6b);
+      z-index: -1;
+      opacity: 0.1;
+      border-radius: 30px;
+    }
 
+    .card.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      margin-top: 1rem;
+      animation: cardGlow 3s infinite alternate;
+    }
 
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 2.5rem; /* Larger heading */
-            margin-bottom: 1.5rem; /* Increased margin */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
-        }
+    @keyframes cardGlow {
+      0% {
+        box-shadow: 0 15px 40px rgba(233, 30, 99, 0.15);
+      }
+      100% {
+        box-shadow: 0 15px 50px rgba(233, 30, 99, 0.25);
+      }
+    }
 
-        p {
-            font-size: 1.1rem; /* Slightly larger text */
-            line-height: 1.8; /* Increased line height for readability */
-            color: var(--text-color);
-            margin-bottom: 1rem; /* Add margin between paragraphs */
-        }
+    h1 {
+      text-align: center;
+      color: #e91e63;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
 
-        p:last-child {
-            margin-bottom: 0; /* No margin after the last paragraph */
-        }
+    h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, #e91e63, #ff6b6b);
+      margin: 0.5rem auto 0;
+      border-radius: 3px;
+    }
 
-        strong {
-            color: var(--primary-dark-color); /* Highlight strong text */
-        }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
 
-        .signature {
-            text-align: right;
-            margin-top: 2.5rem; /* Increased margin */
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #555; /* Slightly different color for signature */
-        }
+    p strong {
+      color: #e91e63;
+      font-weight: 700;
+    }
 
-        /* Media queries for better responsiveness */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
+    .signature {
+      text-align: right;
+      margin-top: 2.5rem;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #666;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      position: relative;
+    }
 
-            p {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
+    .signature::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 0;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e91e63);
+    }
 
-            .open-button {
-                font-size: 1.2rem;
-                padding: 0.8rem 2rem;
-            }
+    .hearts {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center center;
+      opacity: 0;
+      pointer-events: none;
+      animation: float-up 4s ease-out forwards;
+    }
 
-            .card {
-                padding: 1.5rem;
-            }
+    @keyframes float-up {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) scale(1.2);
+        opacity: 0;
+      }
+    }
 
-            .signature {
-                font-size: 1rem;
-                margin-top: 2rem;
-            }
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    .photo-frame {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 1.5rem auto;
+      background: #fff;
+      border: 5px solid #e91e63;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-frame:hover {
+      transform: rotate(10deg) scale(1.05);
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ffe4e1, #fff0f5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e91e63;
+      font-size: 3rem;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: float-note 3s linear forwards;
+    }
+
+    @keyframes float-note {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-150px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .hidden-message {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .hidden-message:hover {
+      color: #e91e63;
+    }
+
+    .secret {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(233, 30, 99, 0.1);
+      border-radius: 10px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (min-width: 600px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      p {
+        font-size: 1.15rem;
+      }
+
+      .card {
+        padding: 3rem;
+      }
+
+      .photo-frame {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .open-button {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <button class="open-button" onclick="openCard()">Open Your Birthday Card 🎁</button>
-        <div class="card" id="birthdayCard">
-            <h1>🎉 Happy Birthday, BASMA 🎉</h1>
-            <p>
-                Hey you,<br><br>
-                Yes, <strong>you</strong>, the incredible, hilarious, beautiful human who somehow decided I was worth spending time with (questionable choice, but I’m not complaining).<br><br>
-                Today is the day the universe upgraded — because <strong>you were born</strong>. And honestly? It’s been thriving ever since.<br><br>
-                I don’t know what we are exactly — maybe it’s complicated, maybe it’s undefined, but one thing I know <strong>for sure</strong> is:<br>
-                <strong>You matter to me. A lot.</strong><br><br>
-                I love your humor, your personality, and honestly... everything about you.<br><br>
-                So here’s to you, Basma —<br>
-                To your dreams, your silly jokes, your unmatched energy, and that spark in your eyes.<br><br>
-                May this year bring you as much joy as you bring to everyone around you (which is A LOT — trust me, I’ve done the math).<br><br>
-                And even if we never quite figure out what to call “us,” know that I’ll always be rooting for you, cherishing you, and secretly planning to steal you away with bad puns and chocolate. 🍫<br><br>
-                <strong>Happy Birthday, my not-quite-defined-but-totally-adored human.</strong><br>
-                Let’s keep making memories that are fun, strange, sweet, and a little bit stupid — just like us. 💛
-            </p>
-            <p class="signature">— With all my love,<br>your favorite weirdo 💌</p>
-        </div>
+  <div class="flowers"></div>
+
+  <div class="container">
+    <button class="open-button animate__animated animate__pulse animate__infinite" onclick="openCard()">Open Your Birthday Card 🎁</button>
+    <div class="card" id="birthdayCard">
+      <h1 class="animate__animated animate__fadeIn">🎉 Happy Birthday, BASMA! 🎉</h1>
+      
+      <div class="photo-frame">
+        <div class="photo-placeholder">🎂</div>
+      </div>
+      
+      <p>
+        Hey you,<br><br>
+        Yes, <strong>you</strong>, the incredible, hilarious, beautiful human who somehow decided I was worth spending time with (questionable choice, but I'm not complaining).<br><br>
+        Today is the day the universe upgraded — because <strong>you were born</strong>. And honestly? It's been thriving ever since.<br><br>
+        I don't know what we are exactly — maybe it's complicated, maybe it's undefined, but one thing I know <strong>for sure</strong> is:<br>
+        <strong>You matter to me. A lot.</strong><br><br>
+        I love your humor, your personality, and honestly... everything about you.<br><br>
+        So here's to you, Basma —<br>
+        To your dreams, your silly jokes, your unmatched energy, and that spark in your eyes.<br><br>
+        May this year bring you as much joy as you bring to everyone around you (which is A LOT — trust me, I've done the math).<br><br>
+        And even if we never quite figure out what to call "us," know that I'll always be rooting for you, cherishing you, and secretly planning to steal you away with bad puns and chocolate. 🍫<br><br>
+        <strong>Happy Birthday, my not-quite-defined-but-totally-adored human.</strong><br>
+        Let's keep making memories that are fun, strange, sweet, and a little bit stupid — just like us. 💛
+      </p>
+      
+      <div class="hidden-message" onclick="revealSecret()">💌 Tap here for a secret message...</div>
+      <div class="secret" id="secretMessage">
+        P.S. You're the only person who can make me smile just by existing. Don't tell anyone I admitted that. 🤫
+      </div>
+      
+      <p class="signature animate__animated animate__fadeIn">— With all my love,<br>your favorite weirdo 💌</p>
     </div>
+  </div>
 
-    <script>
-        function openCard() {
-            const button = document.querySelector(".open-button");
-            const card = document.getElementById("birthdayCard");
-
-            // Hide the button smoothly
-            button.style.opacity = '0';
-            button.style.transform = 'translateY(-20px)';
-            button.style.pointerEvents = 'none';
-
-            // Wait for button transition to complete, then show the card
-            setTimeout(() => {
-                 button.style.display = 'none'; // Fully hide the button
-
-                 // Show the card and trigger its animation
-                 card.classList.add("show");
-
-                 // Trigger confetti effect
-                 confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                 });
-
-                 // Optional: Trigger more confetti after a short delay
-                 setTimeout(() => {
-                     confetti({
-                        particleCount: 80,
-                        spread: 80,
-                        origin: { y: 0.6 },
-                        scalar: 0.8
-                     });
-                 }, 300);
-
-            }, 500); // Match this duration to the button's opacity/transform transition
+  <script>
+    function openCard() {
+      const button = document.querySelector(".open-button");
+      const card = document.getElementById("birthdayCard");
+      
+      // Add animation to button before hiding
+      button.classList.remove('animate__pulse');
+      button.classList.add('animate__zoomOut');
+      
+      setTimeout(() => {
+        button.style.display = "none";
+        card.classList.add("show");
+        createConfetti();
+        playMusic();
+      }, 500);
+      
+      // Add floating hearts
+      setInterval(createHearts, 300);
+    }
+    
+    function createConfetti() {
+      const colors = ['#e91e63', '#ff6b6b', '#ff9800', '#4caf50', '#2196f3', '#9c27b0'];
+      
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.width = Math.random() * 10 + 5 + 'px';
+          confetti.style.height = Math.random() * 10 + 5 + 'px';
+          confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+          document.body.appendChild(confetti);
+          
+          // Remove confetti after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, 5000);
+        }, i * 30);
+      }
+    }
+    
+    function createHearts() {
+      const heart = document.createElement('div');
+      heart.className = 'hearts';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+      document.body.appendChild(heart);
+      
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+    
+    function playMusic() {
+      // Create floating music notes
+      setInterval(() => {
+        const notes = ['♪', '♫', '♩', '♬'];
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.textContent = notes[Math.floor(Math.random() * notes.length)];
+        note.style.left = Math.random() * 100 + 'vw';
+        note.style.color = ['#e91e63', '#ff6b6b', '#ff9800'][Math.floor(Math.random() * 3)];
+        note.style.animationDuration = Math.random() * 2 + 2 + 's';
+        document.body.appendChild(note);
+        
+        setTimeout(() => {
+          note.remove();
+        }, 3000);
+      }, 500);
+    }
+    
+    function revealSecret() {
+      const secret = document.getElementById('secretMessage');
+      const message = document.querySelector('.hidden-message');
+      
+      if (secret.style.display === 'block') {
+        secret.style.display = 'none';
+        message.textContent = '💌 Tap here for a secret message...';
+      } else {
+        secret.style.display = 'block';
+        message.textContent = '🤫 Shhh... keep this between us';
+        
+        // Add some floating hearts when secret is revealed
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            createHearts();
+          }, i * 200);
         }
-    </script>
+      }
+    }
+    
+    // Easter egg - type "basma" to see something special
+    let typed = '';
+    document.addEventListener('keydown', (e) => {
+      typed += e.key.toLowerCase();
+      if (typed.includes('basma')) {
+        createSpecialEffect();
+        typed = '';
+      }
+    });
+    
+    function createSpecialEffect() {
+      // Create a shower of pink hearts
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'hearts';
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+          heart.style.transform = `scale(${Math.random() + 1})`;
+          document.body.appendChild(heart);
+          
+          setTimeout(() => {
+            heart.remove();
+          }, 4000);
+        }, i * 100);
+      }
+    }
+  </script>
 </body>
 </html>
