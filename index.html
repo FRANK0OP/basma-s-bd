@@ -1,153 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday Basma 🎉</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Happy Birthday Basma 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='0' y='90' font-size='90'%3E🎉%3C/text%3E%3C/svg%3E" type="image/svg+xml">
 
-    * {
-      box-sizing: border-box;
-    }
+    <style>
+        /* CSS Variables for easier theme management */
+        :root {
+            --primary-color: #e91e63;
+            --primary-dark-color: #d81b60;
+            --background-start: #fff0f5;
+            --background-end: #ffe4e1;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --button-text-color: white;
+        }
 
-    html, body {
-      font-family: 'Quicksand', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #fff0f5, #ffe4e1);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .flowers {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: url('https://i.imgur.com/E6VwU75.png') repeat;
-      opacity: 0.08;
-      z-index: -1;
-    }
+        html, body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--background-start), var(--background-end)); /* Slightly more dynamic gradient */
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-color);
+            display: flex; /* Use flexbox for centering content */
+            justify-content: center;
+            align-items: center;
+            line-height: 1.7; /* Improved readability */
+        }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
+        /* Optional: Subtle background animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/E6VwU75.png') repeat;
+            opacity: 0.08;
+            z-index: -1;
+            animation: backgroundPulse 15s infinite alternate ease-in-out; /* Subtle animation */
+        }
 
-    .open-button {
-      font-size: 1.4rem;
-      padding: 1rem 2.5rem;
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      margin-top: 2rem;
-    }
+        @keyframes backgroundPulse {
+            0% {
+                opacity: 0.08;
+            }
+            100% {
+                opacity: 0.12;
+            }
+        }
 
-    .open-button:hover {
-      transform: scale(1.05);
-      background-color: #d81b60;
-    }
 
-    .card {
-      opacity: 0;
-      transform: translateY(40px);
-      pointer-events: none;
-      transition: opacity 1s ease, transform 1s ease;
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 20px;
-      max-width: 700px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      display: none;
-      text-align: left;
-    }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%; /* Ensure container takes full width */
+            max-width: 900px; /* Limit container width */
+            padding: 1rem; /* Adjust padding */
+            position: relative; /* Needed for absolute positioning of confetti */
+            z-index: 1; /* Ensure content is above background effect */
+        }
 
-    .card.show {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-      margin-top: 1rem;
-    }
+        .open-button {
+            font-size: 1.4rem;
+            padding: 1rem 2.5rem;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+            box-shadow: 0 6px 15px var(--card-shadow);
+            margin-top: 2rem;
+            position: relative;
+            z-index: 10; /* Ensure button is clickable */
+        }
 
-    h1 {
-      text-align: center;
-      color: #e91e63;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+        .open-button:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-dark-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
 
-    p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #333;
-    }
+        .card {
+            opacity: 0;
+            transform: scale(0.9); /* Start slightly smaller */
+            pointer-events: none;
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Longer, smoother transition */
+            background: var(--card-background);
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 15px 40px var(--card-shadow); /* Enhanced shadow */
+            display: none; /* Hide initially using display */
+            text-align: left;
+            position: relative;
+            z-index: 5;
+        }
 
-    .signature {
-      text-align: right;
-      margin-top: 2rem;
-      font-style: italic;
-      font-size: 1rem;
-    }
+        .card.show {
+            display: block; /* Show using display */
+            opacity: 1;
+            transform: scale(1); /* Scale to normal size */
+            pointer-events: auto;
+            margin-top: 2rem; /* Adjust margin */
+            animation: fadeInScale 1.2s ease-out forwards; /* Use an animation for better control */
+        }
 
-    @media (min-width: 600px) {
-      h1 {
-        font-size: 2.5rem;
-      }
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-      p {
-        font-size: 1.1rem;
-      }
 
-      .signature {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem; /* Larger heading */
+            margin-bottom: 1.5rem; /* Increased margin */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+        }
+
+        p {
+            font-size: 1.1rem; /* Slightly larger text */
+            line-height: 1.8; /* Increased line height for readability */
+            color: var(--text-color);
+            margin-bottom: 1rem; /* Add margin between paragraphs */
+        }
+
+        p:last-child {
+            margin-bottom: 0; /* No margin after the last paragraph */
+        }
+
+        strong {
+            color: var(--primary-dark-color); /* Highlight strong text */
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 2.5rem; /* Increased margin */
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555; /* Slightly different color for signature */
+        }
+
+        /* Media queries for better responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .open-button {
+                font-size: 1.2rem;
+                padding: 0.8rem 2rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .signature {
+                font-size: 1rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <div class="flowers"></div>
-
-  <div class="container">
-    <button class="open-button" onclick="openCard()">Open Your Birthday Card 🎁</button>
-    <div class="card" id="birthdayCard">
-      <h1>🎉 Happy Birthday, BASMA 🎉</h1>
-      <p>
-        Hey you,<br><br>
-        Yes, <strong>you</strong>, the incredible, hilarious, beautiful human who somehow decided I was worth spending time with (questionable choice, but I’m not complaining).<br><br>
-        Today is the day the universe upgraded — because <strong>you were born</strong>. And honestly? It’s been thriving ever since.<br><br>
-        I don’t know what we are exactly — maybe it’s complicated, maybe it’s undefined, but one thing I know <strong>for sure</strong> is:<br>
-        <strong>You matter to me. A lot.</strong><br><br>
-        I love your humor, your personality, and honestly... everything about you.<br><br>
-        So here’s to you, Basma —<br>
-        To your dreams, your silly jokes, your unmatched energy, and that spark in your eyes.<br><br>
-        May this year bring you as much joy as you bring to everyone around you (which is A LOT — trust me, I’ve done the math).<br><br>
-        And even if we never quite figure out what to call “us,” know that I’ll always be rooting for you, cherishing you, and secretly planning to steal you away with bad puns and chocolate. 🍫<br><br>
-        <strong>Happy Birthday, my not-quite-defined-but-totally-adored human.</strong><br>
-        Let’s keep making memories that are fun, strange, sweet, and a little bit stupid — just like us. 💛
-      </p>
-      <p class="signature">— With all my love,<br>your favorite weirdo 💌</p>
+    <div class="container">
+        <button class="open-button" onclick="openCard()">Open Your Birthday Card 🎁</button>
+        <div class="card" id="birthdayCard">
+            <h1>🎉 Happy Birthday, BASMA 🎉</h1>
+            <p>
+                Hey you,<br><br>
+                Yes, <strong>you</strong>, the incredible, hilarious, beautiful human who somehow decided I was worth spending time with (questionable choice, but I’m not complaining).<br><br>
+                Today is the day the universe upgraded — because <strong>you were born</strong>. And honestly? It’s been thriving ever since.<br><br>
+                I don’t know what we are exactly — maybe it’s complicated, maybe it’s undefined, but one thing I know <strong>for sure</strong> is:<br>
+                <strong>You matter to me. A lot.</strong><br><br>
+                I love your humor, your personality, and honestly... everything about you.<br><br>
+                So here’s to you, Basma —<br>
+                To your dreams, your silly jokes, your unmatched energy, and that spark in your eyes.<br><br>
+                May this year bring you as much joy as you bring to everyone around you (which is A LOT — trust me, I’ve done the math).<br><br>
+                And even if we never quite figure out what to call “us,” know that I’ll always be rooting for you, cherishing you, and secretly planning to steal you away with bad puns and chocolate. 🍫<br><br>
+                <strong>Happy Birthday, my not-quite-defined-but-totally-adored human.</strong><br>
+                Let’s keep making memories that are fun, strange, sweet, and a little bit stupid — just like us. 💛
+            </p>
+            <p class="signature">— With all my love,<br>your favorite weirdo 💌</p>
+        </div>
     </div>
-  </div>
 
-  <script>
-    function openCard() {
-      document.querySelector(".open-button").style.display = "none";
-      const card = document.getElementById("birthdayCard");
-      card.classList.add("show");
-    }
-  </script>
+    <script>
+        function openCard() {
+            const button = document.querySelector(".open-button");
+            const card = document.getElementById("birthdayCard");
+
+            // Hide the button smoothly
+            button.style.opacity = '0';
+            button.style.transform = 'translateY(-20px)';
+            button.style.pointerEvents = 'none';
+
+            // Wait for button transition to complete, then show the card
+            setTimeout(() => {
+                 button.style.display = 'none'; // Fully hide the button
+
+                 // Show the card and trigger its animation
+                 card.classList.add("show");
+
+                 // Trigger confetti effect
+                 confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                 });
+
+                 // Optional: Trigger more confetti after a short delay
+                 setTimeout(() => {
+                     confetti({
+                        particleCount: 80,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        scalar: 0.8
+                     });
+                 }, 300);
+
+            }, 500); // Match this duration to the button's opacity/transform transition
+        }
+    </script>
 </body>
 </html>
